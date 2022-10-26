@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lukas' StarNotary DApp</title>
+    <link rel="stylesheet" type="text/css" href="./mystyle.css">
+  </head>
+  
+  <style>
+    #createStar {
+      color: rgb(27, 150, 148);
+    }
+    input {
+      display: block;
+      margin-bottom: 12px;
+    }
+    h1, h2, h3, h4, h5, p {
+        color: rgb(240, 240, 240);
+        text-align: center;
+    }
+    /* h1,h2, h3, h4 {
+      text-shadow: 2px 0 0 #000, 0 -2px 0 rgb(0, 0, 0), 0 2px 0 #000, -2px 0 0 #000;
+    } */
+    label {
+      color: rgb(240, 240, 240);
+    }
+    .createStar {
+      color: black;
+    }
+    body {
+      /* background-color: rgb(26, 67, 93) */
+      background-image: url("https://wallpapers.com/images/high/stars-universe-space-lfppsiiloswp46ae.jpg");
+      background-size: cover;
+    }
+    a {
+      color: rgb(27, 150, 148);
+    }
+    label {
+      font-size: large;
+    }
+
+    button {
+      height: 30px;
+      border-color: rgb(27, 150, 148);
+      border-width: 2px;
+      width: auto;
+      padding-left: 40px;
+      padding-right: 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+    }
+    input {
+      height: 30px;
+      border-color: rgb(27, 150, 148);
+      border-width: 2px;
+      width: auto;
+      padding-left: 40px;
+      padding-right: 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      color: rgb(27, 150, 148);
+    }
+
+  </style>
+  <body>
+    <h1>Lukas' StarNotary Token DAPP</h1>
+    <h3 id="contract-address">Contract address: <a href="url">0x00000000000000000000</a></h3>
+  <hr>
+
+  <br>
+
+    <h2 id="button-label">Create a Star</h2>
+    <label for="starName">Star Name:</label><input type="text" id="starName"></input>
+    <label for="starId">Star ID:</label><input type="text" id="starId"></input>
+    <br><br><button id="createStar" onclick="App.createStar()">Create Star</button>
+    <br><br>
+  <br>
+
+  <hr>
+  <h2>List of currently registered Stars</h2>
+
+    <span id="status"></span>
+
+    <br>
+    <script src="index.js"></script>
+  </body>
+</html>

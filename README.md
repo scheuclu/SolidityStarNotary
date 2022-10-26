@@ -55,4 +55,6 @@ Commands:
 For testing, it's important to test on a local ganach network with gasprice 0
 ```
 reset; truffle test --network development
+truffle run contract-size
+truffle migrate --network goerli
 ```
