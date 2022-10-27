@@ -1,5 +1,5 @@
 import Web3 from "web3";
-import starNotaryArtifact from "../../client/src/contracts/StarNotary.json";
+import starNotaryArtifact from "./StarNotary.json";
 
 import DataTable from "datatables.net"
 
