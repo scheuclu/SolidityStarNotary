@@ -1,7 +1,11 @@
 import Web3 from "web3";
 import starNotaryArtifact from "../../client/src/contracts/StarNotary.json";
 
+import DataTable from "datatables.net"
+
 import Swal from 'sweetalert2'
+
+
 
 const App = {
   web3: null,
@@ -9,9 +13,10 @@ const App = {
   meta: null,
 
   start: async function() {
-    //const { web3 } = this;
+    const { web3 } = this;
 
-    const web3 = new Web3('https://goerli.infura.io/v3/af8eece80afb40ef8be65fbcdf4a5961')
+    //const web3 = new Web3('https://goerli.infura.io/v3/af8eece80afb40ef8be65fbcdf4a5961');
+    //web3 = new Web3(window.web3.currentProvider.enable())
 
     try {
       // get contract instance
@@ -32,10 +37,34 @@ const App = {
       Swal.fire({
         icon: 'error',
         title: 'Could not connect to contract or chain',
-        text: 'The website was unable to connect to the contract or to the Ethereum Goerli chain.',
-        footer: 'Contact the author for assitance.'
+        text: 'The website was unable to connect to the contract or to the Ethereum Goerli chain. Do you have a web3 wallet, like Metamask, installed?',
+        footer: 'Install Metamask or contact the author for assitance.'
       })
     }
+
+
+    //Create table
+    let table1 = new DataTable(
+      '#myfancytable',
+      {columns: [
+        { title: 'Star ID' },
+        { title: 'Star Name' }]
+      }
+    );
+
+    // Read events, so existing stars can be identified.
+    let pastEvents = await this.meta.getPastEvents("allEvents", { fromBlock: 1});
+    console.log("Past Events",pastEvents);
+    for (const x of pastEvents) {
+      if (x.event)
+      console.log(x);
+      console.log(x.event);
+      console.log(x.returnValues.from, x.returnValues.to);
+      if(x.event=="Transfer" & x.returnValues.from=="0x0000000000000000000000000000000000000000"){
+        table1.row.add([x.returnValues.tokenId, "TODO"]).draw();
+      }
+    }
+
   },
 
   setStatus: function(message) {
@@ -44,11 +73,32 @@ const App = {
   },
 
   createStar: async function() {
+    ///alert("Create Star called");//TODO delete
     const { createStar } = this.meta.methods;
     const name = document.getElementById("starName").value;
     const id = document.getElementById("starId").value;
-    await createStar(name, id).send({from: this.account, gasPrice: 100000});
-    App.setStatus("New Star Owner is " + this.account + ".");
+    ///console.log("A");//TODO delete line
+    await createStar(name, id).send({from: this.account});
+    //await createStar(name, id, {from: this.account});
+    Swal.fire("Successfully created a new star!");
+  },
+
+  sellStar: async function() {
+    ///alert("Create Star called");//TODO delete
+    const { putStarUpForSale } = this.meta.methods;
+    const ethprice = document.getElementById("askingPrice-sell").value;
+    let starPrice = Web3.utils.toWei(ethprice, "ether");
+    const id = document.getElementById("starId-sell").value;
+    await putStarUpForSale(id, starPrice).send({from: this.account});
+    Swal.fire("Successfully put up star for sale!");
+  },
+
+  buyStar: async function() {
+    ///alert("Create Star called");//TODO delete
+    const { buyStar } = this.meta.methods;
+    const id = document.getElementById("starId-buy").value;
+    await buyStar(id).send({from: this.account});
+    Swal.fire("Successfully bought Star!");
   }
 
 };

@@ -3,9 +3,17 @@
   <head>
     <title>Lukas' StarNotary DApp</title>
     <link rel="stylesheet" type="text/css" href="./mystyle.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
   </head>
   
   <style>
+
+    /* * {
+      color: white;
+    } */
     #createStar {
       color: rgb(27, 150, 148);
     }
@@ -23,7 +31,8 @@
     label {
       color: rgb(240, 240, 240);
     }
-    .createStar {
+
+    .actionbutton {
       color: black;
     }
     body {
@@ -50,7 +59,7 @@
       font-size: 16px;
       font-weight: bold;
       color: white;
-    }
+    };
     input {
       height: 30px;
       border-color: rgb(27, 150, 148);
@@ -63,29 +72,62 @@
       font-size: 16px;
       font-weight: bold;
       color: rgb(27, 150, 148);
+    };
+
+    table {
+      color: white;
+    }
+
+    td, th {
+      color: white;
+      border: 1px solid white; 
     }
 
   </style>
   <body>
-    <h1>Lukas' StarNotary Token DAPP</h1>
-    <h3 id="contract-address">Contract address: <a href="url">0x00000000000000000000</a></h3>
+    <h1>Lukas' StarNotary Token DApp</h1>
+    <h3 id="contract-address">Contract address: <a href="https://goerli.etherscan.io/address/0x5eb5aff80b9e9119e12ffb5f847758a99d1cac18" target="blank/">0x5EB5AFf80B9e9119E12FFB5f847758a99D1caC18</a> (Goerli)</h3>
+    <p>StarNotary implements an ERC721 token representing newly discovered stars and the star name. When a new star(token) is minted, a name is given to the star.</p>
+    <p>The star tokens can be traded according to ERC721 specifications. A sale is achieved if a seller sets up a star for sale, with an asking price and a buyer subsequently calls the buy function with at least that price.</p>
   <hr>
-
   <br>
-
     <h2 id="button-label">Create a Star</h2>
+    <p>This is used to mint new stars. Only authorized addresses are allowed to mint.</p>
     <label for="starName">Star Name:</label><input type="text" id="starName"></input>
     <label for="starId">Star ID:</label><input type="text" id="starId"></input>
-    <br><br><button id="createStar" onclick="App.createStar()">Create Star</button>
+    <br><br><button class="actionbutton" onclick="App.createStar()">Create Star</button>
+    <br><br>
+  <br>
+
+
+  <hr>
+  <br>
+    <h2 id="button-label">Sell a star</h2>
+    <p>You can put up your star for sale here. As soon as a buyer accepts the asking price, ownership will be transferred.</p>
+    <label for="starId-sell">Star ID:</label><input type="text" id="starId-sell"></input>
+    <label for="askingPrice-sell">Asking Price ETH:</label><input type="number" id="askingPrice-sell"></input>
+    <br><br><button class="actionbutton" onclick="App.sellStar()">Sell Star</button>
     <br><br>
   <br>
 
   <hr>
+  <br>
+    <h2 id="button-label">Buy a star</h2>
+    <p>This is used to buy stars. If the star you're trying to sell is not put up for sale, you'll get an error message.</p>
+    <label for="starId-buy">Star ID:</label><input type="text" id="starId-buy"></input>
+    <br><br><button class="actionbutton" onclick="App.buyStar()">Buy Star</button>
+    <br><br>
+  <br>
+
+
+  <hr>
   <h2>List of currently registered Stars</h2>
+  <p> Here's a list of all stars ever minted under this contract </p>
+  <table id="myfancytable" class="table table-bordered dt-responsive nowrap" style="width:100%">
+  </table>
 
-    <span id="status"></span>
-
-    <br>
+  <span id="status"></span>
+  <br>
     <script src="index.js"></script>
   </body>
 </html>
