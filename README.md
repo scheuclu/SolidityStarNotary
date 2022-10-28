@@ -58,3 +58,34 @@ reset; truffle test --network development
 truffle run contract-size
 truffle migrate --network goerli
 ```
+
+
+The contract is on Goerli under the following address:
+0x5EB5AFf80B9e9119E12FFB5f847758a99D1caC18
+
+
+2_deploy_star_notary.js
+=======================
+
+   Deploying 'StarNotary'
+   ----------------------
+   > transaction hash:    0x743d2d337dc91d7eee7c3f91e8e00dc686c30bcb9312b694dc2dc77171d980a5
+   > Blocks: 1            Seconds: 13
+   > contract address:    0x5EB5AFf80B9e9119E12FFB5f847758a99D1caC18
+   > block number:        7843184
+   > block timestamp:     1666871688
+   > account:             0x9D01ED9408137AaE96fc0969A01401732A249EBb
+   > balance:             0.660998695868355202
+   > gas used:            2549034 (0x26e52a)
+   > gas price:           136.096352436 gwei
+   > value sent:          0 ETH
+   > total cost:          0.346914229635346824 ETH
+
+   Pausing for 2 confirmations...
+
+   -------------------------------
+   > confirmation number: 1 (block: 7843185)
+   > confirmation number: 2 (block: 7843186)
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:     0.346914229635346824 ETH
